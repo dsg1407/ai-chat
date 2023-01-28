@@ -42,8 +42,8 @@ export function App() {
   }, [])
 
   return (
-    <div className="bg-background h-screen py-8 px-20 text-gray-200 font-roboto grid grid-rows-layout">
-      <header className="flex flex-col gap-3">
+    <div className="bg-background h-screen text-gray-200 font-roboto grid grid-rows-layout py-6 lg:py-8 px-8 lg:px-20">
+      <header className="flex flex-col gap-6 lg:gap-3">
         <div className="flex items-center justify-between gap-4 ">
           <img
             className="w-full max-w-[48px] rounded-full"
