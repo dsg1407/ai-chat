@@ -13,6 +13,9 @@ module.exports = {
         background: "#1A1924",
         boxBackground: "#282843",
       },
+      gridTemplateRows: {
+        layout: "76px 1fr 56px",
+      },
     },
   },
   plugins: [],
