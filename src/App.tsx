@@ -27,12 +27,19 @@ export function App() {
         <p className="text-center text-xs leading-3">{`Hoje 11:30`}</p>
       </header>
 
-      <main className="overflow-y-auto">
-        <div className="my-5">MESSAGES</div>
+      <main className="overflow-y-auto my-6">
+        <div className="">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste
+            veritatis officia repellat, aperiam nostrum optio consequatur
+            suscipit delectus voluptates ab, at distinctio totam, fugiat nobis
+            voluptate nesciunt vero saepe nisi!
+          </p>
+        </div>
       </main>
 
-      <footer className=" py-3.5 px-6 rounded-full bg-boxBackground">
-        <form className="flex items-center justify-between gap-2.5">
+      <footer className=" py-3.5 px-6 rounded-full bg-boxBackground flex items-center">
+        <form className="flex items-center justify-between gap-2.5 w-full">
           <input
             type="text"
             placeholder="Digite sua mensagem"
