@@ -82,8 +82,8 @@ export function App() {
         <form className="flex items-center justify-between gap-2.5 w-full">
           <input
             type="text"
-            placeholder="Digite sua mensagem"
-            className="w-full leading-3 text-xs bg-transparent "
+            placeholder="Digite sua mensagem..."
+            className="w-full leading-3 text-xs bg-transparent placeholder:italic focus:outline-none "
             required
           />
           <button type="submit">
