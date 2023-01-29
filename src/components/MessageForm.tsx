@@ -1,12 +1,31 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import { PaperPlaneRight } from "phosphor-react"
 
-export function MessageForm() {
+import { MessageBoxProps } from "./MessageBox"
+interface MessageFormProps {
+  messages: MessageBoxProps[]
+  submitMessages: React.Dispatch<
+    React.SetStateAction<MessageBoxProps[] | undefined>
+  >
+}
+
+export function MessageForm({ messages, submitMessages }: MessageFormProps) {
   const [message, setMessage] = useState("")
 
   function handleSubmitMessage(e: React.SyntheticEvent) {
     e.preventDefault()
-    console.log(message)
+
+    const newMessage: MessageBoxProps = {
+      message: message,
+      sender: "user",
+      name: "Você",
+      time: new Date().toLocaleString("pt-br", { timeStyle: "short" }),
+    }
+
+    const newMessages = [...messages, newMessage]
+
+    submitMessages(newMessages)
+
     setMessage("")
   }
 

@@ -1,4 +1,5 @@
 import { Circle, X } from "phosphor-react"
+import { useEffect, useState } from "react"
 
 import Avatar from "../assets/foto.jpg"
 
@@ -16,7 +17,13 @@ export function Header() {
     timeStyle: "short",
   })
 
-  const replierName = names[Math.floor(Math.random() * 5)]
+  const [replierName, setReplierName] = useState("")
+
+  useEffect(() => {
+    setReplierName(names[Math.floor(Math.random() * 5)])
+  }, [])
+
+  console.log("hello")
 
   return (
     <header className="flex flex-col gap-6 lg:gap-3">
