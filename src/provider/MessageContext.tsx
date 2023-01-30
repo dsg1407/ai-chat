@@ -21,14 +21,14 @@ const MessageProvider: React.FC<React.ReactNode> = ({ children }: any) => {
     {
       message: "Olá, em que posso ajudar ? 😍",
       sender: "replier",
-      name: "Cecilia",
-      time: "11:30",
+      name: "Chat",
+      time: new Date().toLocaleString("pt-br", { timeStyle: "short" }),
     },
     {
-      message: "Digite abaixo o que deseja pesquisar.",
+      message: "Digite abaixo o que deseja.",
       sender: "replier",
-      name: "Você",
-      time: "11:32",
+      name: "Chat",
+      time: new Date().toLocaleString("pt-br", { timeStyle: "short" }),
     },
   ])
 
