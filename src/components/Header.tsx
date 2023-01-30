@@ -12,14 +12,15 @@ export function Header() {
     "Svetovid Urszula",
   ]
 
-  const todayDate = new Date().toLocaleString("pt-br", {
-    dateStyle: "short",
-    timeStyle: "short",
-  })
-
   const [replierName, setReplierName] = useState("")
+  const [todayDate, setTodayDate] = useState("")
 
   useEffect(() => {
+    const today = new Date().toLocaleString("pt-br", {
+      dateStyle: "short",
+      timeStyle: "short",
+    })
+    setTodayDate(today)
     setReplierName(names[Math.floor(Math.random() * 5)])
   }, [])
 
