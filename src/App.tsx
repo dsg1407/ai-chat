@@ -1,46 +1,17 @@
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useRef, useContext } from "react"
 
 import "./styles/global.css"
 
 import { Header } from "./components/Header"
-import { MessageBox, MessageBoxProps } from "./components/MessageBox"
+import { MessageBox } from "./components/MessageBox"
 import { MessageForm } from "./components/MessageForm"
 
+import { MessagesContext } from "./context/MessageContext"
+
 export function App() {
-  const messagesTest = [
-    {
-      message: "Tive uma ideia incrível para um projeto! 😍",
-      sender: "replier",
-      name: "Cecilia",
-      time: "11:30",
-    },
-    {
-      message: "Sério? Me conta mais.",
-      sender: "user",
-      name: "Você",
-      time: "11:32",
-    },
-    {
-      message:
-        "E se a gente fizesse um chat moderno e responsivo em apenas uma semana?",
-      sender: "replier",
-      name: "Cecilia",
-      time: "11:34",
-    },
-    {
-      message: "#boraCodar! 🚀",
-      sender: "user",
-      name: "Você",
-      time: "11:36",
-    },
-  ]
+  const { messages } = useContext(MessagesContext)
 
-  const [messages, setMessages] = useState<MessageBoxProps[]>()
   const el = useRef<null | HTMLDivElement>(null)
-
-  useEffect(() => {
-    setMessages(messagesTest)
-  }, [])
 
   useEffect(() => {
     if (el.current === null) {
@@ -67,7 +38,7 @@ export function App() {
       </main>
 
       <footer className=" py-3.5 px-6 rounded-full bg-boxBackground flex items-center">
-        <MessageForm messages={messages} submitMessages={setMessages} />
+        <MessageForm />
       </footer>
     </div>
   )

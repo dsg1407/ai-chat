@@ -24,8 +24,6 @@ export function Header() {
     setReplierName(names[Math.floor(Math.random() * 5)])
   }, [])
 
-  console.log("hello")
-
   return (
     <header className="flex flex-col gap-6 lg:gap-3">
       <div className="flex items-center justify-between gap-4 ">

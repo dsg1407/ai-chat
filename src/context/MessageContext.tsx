@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState, createContext, ReactNode } from "react"
 
 export interface MessageProps {
   message: string
@@ -7,16 +7,20 @@ export interface MessageProps {
   time: string
 }
 
-export interface MessageContextType {
+interface MessageProviderProps {
+  children: ReactNode
+}
+
+interface MessageContextData {
   messages: MessageProps[]
   saveMessage: (messages: MessageProps) => void
 }
 
-export const MessagesContext = React.createContext<MessageContextType | null>(
-  null
+export const MessagesContext = createContext<MessageContextData>(
+  {} as MessageContextData
 )
 
-const MessageProvider: React.FC<React.ReactNode> = ({ children }: any) => {
+export function MessageProvider({ children }: MessageProviderProps) {
   const [messages, setMessages] = useState<MessageProps[]>([
     {
       message: "Olá, em que posso ajudar ? 😍",
