@@ -1,4 +1,6 @@
-import { useState, createContext, ReactNode } from "react"
+import { useState, createContext, ReactNode, useEffect } from "react"
+
+import namesList from "../assets/names.json"
 
 export interface MessageProps {
   message: string
@@ -14,6 +16,14 @@ interface MessageProviderProps {
 interface MessageContextData {
   messages: MessageProps[]
   saveMessage: (messages: MessageProps) => void
+  chatStartOver: () => void
+  replier: ReplierProps
+}
+
+interface ReplierProps {
+  fullName: string
+  firstName: string
+  lastName: string
 }
 
 export const MessagesContext = createContext<MessageContextData>(
@@ -21,17 +31,20 @@ export const MessagesContext = createContext<MessageContextData>(
 )
 
 export function MessageProvider({ children }: MessageProviderProps) {
+  const [replier, setReplier] = useState<ReplierProps>(
+    namesList[Math.floor(Math.random() * namesList.length)]
+  )
   const [messages, setMessages] = useState<MessageProps[]>([
     {
       message: "Olá, em que posso ajudar ? 😍",
       sender: "replier",
-      name: "Chat",
+      name: replier.firstName,
       time: new Date().toLocaleString("pt-br", { timeStyle: "short" }),
     },
     {
       message: "Digite abaixo o que deseja.",
       sender: "replier",
-      name: "Chat",
+      name: replier.firstName,
       time: new Date().toLocaleString("pt-br", { timeStyle: "short" }),
     },
   ])
@@ -46,8 +59,31 @@ export function MessageProvider({ children }: MessageProviderProps) {
     setMessages([...messages, newMessage])
   }
 
+  const chatStartOver = () => {
+    const selectedReplier =
+      namesList[Math.floor(Math.random() * namesList.length)]
+
+    setReplier(selectedReplier)
+    setMessages([
+      {
+        message: "Olá, em que posso ajudar ? 😍",
+        sender: "replier",
+        name: selectedReplier.firstName,
+        time: new Date().toLocaleString("pt-br", { timeStyle: "short" }),
+      },
+      {
+        message: "Digite abaixo o que deseja.",
+        sender: "replier",
+        name: selectedReplier.firstName,
+        time: new Date().toLocaleString("pt-br", { timeStyle: "short" }),
+      },
+    ])
+  }
+
   return (
-    <MessagesContext.Provider value={{ messages, saveMessage }}>
+    <MessagesContext.Provider
+      value={{ messages, saveMessage, chatStartOver, replier }}
+    >
       {children}
     </MessagesContext.Provider>
   )
