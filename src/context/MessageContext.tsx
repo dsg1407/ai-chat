@@ -1,4 +1,4 @@
-import { useState, createContext, ReactNode, useEffect } from "react"
+import { useState, createContext, ReactNode } from "react"
 
 import namesList from "../assets/names.json"
 
