@@ -15,6 +15,7 @@ interface MessageProviderProps {
 
 interface MessageContextData {
   messages: MessageProps[]
+  setMessages: React.Dispatch<React.SetStateAction<MessageProps[]>>
   saveMessage: (messages: MessageProps) => void
   chatStartOver: () => void
   replier: ReplierProps
@@ -82,7 +83,7 @@ export function MessageProvider({ children }: MessageProviderProps) {
 
   return (
     <MessagesContext.Provider
-      value={{ messages, saveMessage, chatStartOver, replier }}
+      value={{ messages, setMessages, saveMessage, chatStartOver, replier }}
     >
       {children}
     </MessagesContext.Provider>
