@@ -19,7 +19,7 @@ export function App() {
   }, [messages])
 
   return (
-    <div className="bg-background h-screen text-gray-200 font-roboto grid grid-rows-layout py-6 lg:py-8 px-8 lg:px-20">
+    <div className="bg-background screen-device-height text-gray-200 font-roboto grid grid-rows-layout py-6 lg:py-8 px-8 lg:px-20">
       <Header />
 
       <main className="overflow-y-auto my-6 flex flex-col gap-7">
