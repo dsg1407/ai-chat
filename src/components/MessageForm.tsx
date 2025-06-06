@@ -1,25 +1,19 @@
 import { useState, useContext, FormEvent } from "react"
-import { Configuration, OpenAIApi } from "openai"
 import { PaperPlaneRight } from "phosphor-react"
 
 import { MessagesContext, MessageProps } from "../context/MessageContext"
 
 export function MessageForm() {
   const [message, setMessage] = useState("")
-  const { setMessages, messages, replier } = useContext(MessagesContext)
+  const { setMessages, messages, replier, chat } = useContext(MessagesContext)
 
-  const configuration = new Configuration({
-    apiKey: import.meta.env.VITE_OPENAI_API_KEY,
-  })
-
-  const openai = new OpenAIApi(configuration)
 
   async function handleSubmitMessage(e: FormEvent) {
     e.preventDefault()
 
     const newUserMessage: MessageProps = {
       message: message,
-      sender: "user",
+      role: "user",
       name: "Você",
       time: new Date().toLocaleString("pt-br", { timeStyle: "short" }),
     }
@@ -28,32 +22,19 @@ export function MessageForm() {
 
     setMessage("")
 
-    const allMessages = JSON.stringify(
-      Array(...messages, newUserMessage)
-        .map(({ message }) => `${message}`)
-        .join("")
-    )
-
-    const { data } = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: allMessages,
-      temperature: 0.9,
-      max_tokens: 100,
-      top_p: 1,
-      frequency_penalty: 0,
-      presence_penalty: 0.6,
-      stop: [" replier:", " user:"],
+    const { text } = await chat.sendMessage({
+      message: message,
+      config: {
+        maxOutputTokens: 200,
+      },
     })
-
-    console.log(data.choices[0])
-    console.log(data.choices[0].text)
 
     setMessages([
       ...messages,
       newUserMessage,
       {
-        message: data.choices[0].text,
-        sender: "replier",
+        message: text,
+        role: "model",
         name: replier.firstName,
         time: new Date().toLocaleString("pt-br", { timeStyle: "short" }),
       } as MessageProps,

@@ -23,13 +23,13 @@ export function App() {
       <Header />
 
       <main className="overflow-y-auto my-6 flex flex-col gap-7">
-        {messages?.map(({ message, name, sender, time }, i) => {
+        {messages?.map(({ message, name, role, time }, i) => {
           return (
             <MessageBox
               key={`${time}-${i}`}
               message={message}
               name={name}
-              sender={sender}
+              role={role}
               time={time}
             />
           )
